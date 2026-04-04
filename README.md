@@ -3,7 +3,7 @@
 I made these scripts to clean only the chat history and the logs from Ollama GUI and server.
 It does not remove models, users, or app settings.
 
-Scripts are available for **macOS**, **Linux**, and **Windows** (untested :-/ ).
+Scripts are available for **macOS**, **Linux**, and **Windows**.
 
 On macOS and Windows it checks common Ollama database paths automatically.
 It also checks if `sqlite3` is installed and if the needed tables exist.
@@ -113,7 +113,36 @@ Open PowerShell and run:
 winget install SQLite.SQLite
 ```
 
-After install, close and reopen PowerShell so `sqlite3` is on your PATH.
+> **Tip:** If winget fails with a certificate error (0x8A15005E), run these two commands first:
+>
+> ```powershell
+> winget settings --enable BypassCertificatePinningForMicrosoftStore
+> winget upgrade Microsoft.AppInstaller --accept-source-agreements --accept-package-agreements
+> ```
+>
+> Then retry `winget install SQLite.SQLite`.
+
+![winget install SQLite](img/windows_winget_sqllite.png)
+
+After install, winget places `sqlite3.exe` inside `%LOCALAPPDATA%\Microsoft\WinGet\Packages\` but does **not** add it to your PATH automatically. Fix it:
+
+1. Find the exact path:
+
+```powershell
+Get-ChildItem "$env:LOCALAPPDATA\Microsoft\WinGet\Packages" -Recurse -Filter "sqlite3.exe" | Select-Object FullName
+```
+
+2. Add the folder to your user PATH (replace the path with what the command above returned):
+
+```powershell
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Users\<YOU>\AppData\Local\Microsoft\WinGet\Packages\SQLite.SQLite_Microsoft.Winget.Source_8wekyb3d8bbwe", [EnvironmentVariableTarget]::User)
+```
+
+3. Close and reopen PowerShell, then verify:
+
+```powershell
+sqlite3 --version
+```
 
 **Option 2 — manual:**
 
@@ -128,10 +157,16 @@ After install, close and reopen PowerShell so `sqlite3` is on your PATH.
 
 ### Allow PowerShell scripts to run
 
-Windows blocks unsigned scripts by default. Run this once:
+Windows blocks unsigned scripts by default. Run this once to allow local scripts:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Or, to bypass for a single run without changing policy:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\ollama_chat_deleter.ps1
 ```
 
 ### How to run
@@ -139,6 +174,14 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```powershell
 .\ollama_chat_deleter.ps1
 ```
+
+![Running the script on Windows](img/runscript_windows.png)
+
+> **Note:** The script stops Ollama before wiping the database and waits for all
+> Ollama processes (including the tray app) to exit before proceeding. If the
+> `-wal` or `-shm` sidecar files cannot be removed because another process still
+> holds them, a warning is printed but the chat deletion has already succeeded —
+> SQLite cleans those files automatically on the next open.
 
 The script looks for the database in these locations and uses the first one it finds:
 
@@ -165,6 +208,14 @@ or:
 $env:OLLAMA_BACKUP = "yes"
 .\ollama_chat_deleter.ps1
 ```
+
+Before running the script:
+
+![Before (Windows)](img/win_before.png)
+
+After running the script:
+
+![After (Windows)](img/win_after.png)
 
 ### Delete Ollama logs (Windows)
 

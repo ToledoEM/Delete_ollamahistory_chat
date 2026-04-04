@@ -71,11 +71,16 @@ if (-not (Get-Command sqlite3 -ErrorAction SilentlyContinue)) {
 }
 
 # ---- Stop Ollama process ----
-$ollamaProcs = Get-Process -Name "ollama","Ollama" -ErrorAction SilentlyContinue
+$ollamaProcs = Get-Process -Name "ollama","Ollama","ollama app","ollama_app" -ErrorAction SilentlyContinue
 if ($ollamaProcs) {
     Write-Log "Stopping Ollama..."
     $ollamaProcs | Stop-Process -Force
-    Start-Sleep -Seconds 1
+    # Wait until all ollama processes are gone (up to 10s)
+    $waited = 0
+    while ((Get-Process -Name "ollama","Ollama","ollama app","ollama_app" -ErrorAction SilentlyContinue) -and $waited -lt 10) {
+        Start-Sleep -Seconds 1
+        $waited++
+    }
 }
 
 # ---- Optional backup ----
@@ -127,7 +132,10 @@ sqlite3 $DB "VACUUM;"
 # ---- Clean WAL/SHM files if present ----
 foreach ($ext in "-wal","-shm") {
     $f = "$DB$ext"
-    if (Test-Path $f) { Remove-Item $f -Force }
+    if (Test-Path $f) {
+        try { Remove-Item $f -Force -ErrorAction Stop }
+        catch { Write-Log "WARN: could not remove $f (still locked) - safe to ignore, SQLite will clean it on next open." }
+    }
 }
 
 Write-Log "Done. Chat history wiped from: $DB"
