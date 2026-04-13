@@ -3,6 +3,8 @@
 I made these scripts to clean only the chat history and the logs from Ollama GUI and server.
 It does not remove models, users, or app settings.
 
+Motivation: is not only me, (issue in ollama)[https://github.com/ollama/ollama/issues/13926], and (another issue)[https://github.com/ollama/ollama/issues/15099]    
+
 Scripts are available for **macOS**, **Linux**, and **Windows**.
 
 On macOS and Windows it checks common Ollama database paths automatically.
@@ -235,3 +237,9 @@ If your logs path is different:
 $env:OLLAMA_LOG_DIR = "C:\custom\log\path"
 .\ollama_logs_deleter.ps1
 ```
+
+> [!NOTE]
+>  Right now these are more involved that I woudl like to, but I do not have the knowledge to make this into multiplatform app
+
+//
+Enjoy
