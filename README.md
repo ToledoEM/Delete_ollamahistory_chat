@@ -239,7 +239,7 @@ $env:OLLAMA_LOG_DIR = "C:\custom\log\path"
 ```
 
 > [!NOTE]
->  Right now these are more involved that I woudl like to, but I do not have the knowledge to make this into multiplatform app
+>  Right now these are more involved that I would like to, but I do not have the knowledge to make this into multiplatform app
 
 //
 Enjoy
