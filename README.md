@@ -3,7 +3,7 @@
 I made these scripts to clean only the chat history and the logs from Ollama GUI and server.
 It does not remove models, users, or app settings.
 
-Motivation: is not only me, (issue in ollama)[https://github.com/ollama/ollama/issues/13926], and (another issue)[https://github.com/ollama/ollama/issues/15099]    
+Motivation: order and privacy. But is not only me, [issue](https://github.com/ollama/ollama/issues/13926), [issue](https://github.com/ollama/ollama/issues/15099), [issue](https://github.com/ollama/ollama/issues/14313), [and another](https://github.com/ollama/ollama/issues/14908)
 
 Scripts are available for **macOS**, **Linux**, and **Windows**.
 

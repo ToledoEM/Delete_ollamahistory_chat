@@ -1,1 +1,7 @@
-AGENT.md
+_quarto.yml
+readme.qmd
+_site/
+styles.css
+
+/.quarto/
+**/*.quarto_ipynb
