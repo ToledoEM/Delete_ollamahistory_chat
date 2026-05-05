@@ -1,5 +1,9 @@
 # Ollama chat history cleaner
 
+<img src="https://toledoem.github.io/img/DOC_logo.png" align="right" width=150/>
+
+
+   
 I made these scripts to clean only the chat history and the logs from Ollama GUI and server.
 It does not remove models, users, or app settings.
 
