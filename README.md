@@ -2,8 +2,13 @@
 
 <img src="https://toledoem.github.io/img/DOC_logo.png" align="right" width=150/>
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![macOS](https://img.shields.io/badge/macOS-supported-brightgreen)
+![Linux](https://img.shields.io/badge/Linux-supported-brightgreen)
+![Windows](https://img.shields.io/badge/Windows-supported-brightgreen)
+![Last Commit](https://img.shields.io/github/last-commit/toledoem/Delete_ollamahistory_chat)
+![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=flat&logo=gnu-bash&logoColor=white)
 
-   
 I made these scripts to clean only the chat history and the logs from Ollama GUI and server.
 It does not remove models, users, or app settings.
 
