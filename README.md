@@ -4,7 +4,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![macOS](https://img.shields.io/badge/macOS-supported-brightgreen)
-![Linux](https://img.shields.io/badge/Linux-supported-brightgreen)
 ![Windows](https://img.shields.io/badge/Windows-supported-brightgreen)
 ![Last Commit](https://img.shields.io/github/last-commit/toledoem/Delete_ollamahistory_chat)
 ![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=flat&logo=gnu-bash&logoColor=white)
@@ -14,7 +13,7 @@ It does not remove models, users, or app settings.
 
 Motivation: order and privacy. But is not only me, [Reddit post](https://www.reddit.com/r/ollama/comments/1dbi1el/how_to_clear_or_disable_user_chat_history/), [PR](https://github.com/ollama/ollama/pull/14326), [issue](https://github.com/ollama/ollama/issues/3002), [issue](https://github.com/ollama/ollama/issues/13926), [issue](https://github.com/ollama/ollama/issues/11785), [issue](https://github.com/ollama/ollama/issues/15099), [issue](https://github.com/ollama/ollama/issues/14313), [and another](https://github.com/ollama/ollama/issues/14908)
 
-Scripts are available for **macOS**, **Linux**, and **Windows**.
+Scripts are available for **macOS**, and **Windows**.
 
 On macOS and Windows it checks common Ollama database paths automatically.
 It also checks if `sqlite3` is installed and if the needed tables exist.
@@ -34,28 +33,12 @@ After running the script:
 
 ---
 
-## macOS and Linux
+## macOS
 
 ### Install sqlite3
 
-**macOS:**
 ```bash
 brew install sqlite
-```
-
-**Debian / Ubuntu:**
-```bash
-sudo apt update && sudo apt install -y sqlite3
-```
-
-**Fedora:**
-```bash
-sudo dnf install -y sqlite
-```
-
-**Arch:**
-```bash
-sudo pacman -S sqlite
 ```
 
 ### How to run
